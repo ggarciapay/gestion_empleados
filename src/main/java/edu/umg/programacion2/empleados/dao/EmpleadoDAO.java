@@ -15,11 +15,11 @@ import java.util.Optional;
 public class EmpleadoDAO {
 
     private static final String URL =
-            "jdbc:mysql://127.0.0.1:3306/prog2_db?useSSL=false&serverTimezone=UTC";
+            "jdbc:mysql://127.0.0.1:3306/gestion_empleados?useSSL=false&serverTimezone=UTC";
 
     private static final String USER = "root";
 
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "root";
 
     private Connection obtenerConexion() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
