@@ -54,7 +54,7 @@ public class EditarEmpleadosView extends JFrame {
 
         JLabel titulo = new JLabel("EDITAR EMPLEADO");
 
-        titulo.setFont(new Font("Arial", Font.BOLD, 20));
+        titulo.setFont(new Font("Arial", Font.BOLD, 30));
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
 
         txtId = new JTextField();
@@ -80,36 +80,143 @@ public class EditarEmpleadosView extends JFrame {
         chkActivo.setEnabled(false);
         btnActualizar.setEnabled(false);
 
-        JPanel formulario = new JPanel(new GridLayout(8, 2, 10, 10));
+        JPanel formulario = new JPanel(new GridBagLayout());
 
-        formulario.add(new JLabel("ID:"));
-        formulario.add(txtId);
+        GridBagConstraints gbc = new GridBagConstraints();
 
-        formulario.add(new JLabel(""));
-        formulario.add(btnBuscar);
+        gbc.insets = new Insets(8, 0, 8, 0);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        formulario.add(new JLabel("Nombre:"));
-        formulario.add(txtNombre);
+        Font fuenteEtiqueta = new Font("Arial", Font.BOLD, 18);
+        Font fuenteCampo = new Font("Arial", Font.PLAIN, 18);
 
-        formulario.add(new JLabel("Departamento:"));
-        formulario.add(txtDepartamento);
+        txtId.setFont(fuenteCampo);
+        txtNombre.setFont(fuenteCampo);
+        txtDepartamento.setFont(fuenteCampo);
+        txtSalario.setFont(fuenteCampo);
+        txtFecha.setFont(fuenteCampo);
+        txtExperiencia.setFont(fuenteCampo);
+        txtBono.setFont(fuenteCampo);
 
-        formulario.add(new JLabel("Salario:"));
-        formulario.add(txtSalario);
+        chkActivo.setFont(fuenteEtiqueta);
 
-        formulario.add(new JLabel("Fecha contratación:"));
-        formulario.add(txtFecha);
+        txtId.setPreferredSize(new Dimension(180, 45));
 
-        formulario.add(new JLabel("Años experiencia:"));
-        formulario.add(txtExperiencia);
+        Dimension tamañoCampo = new Dimension(355, 65);
 
-        formulario.add(new JLabel("Bono anual:"));
-        formulario.add(txtBono);
+        txtNombre.setPreferredSize(tamañoCampo);
+        txtDepartamento.setPreferredSize(tamañoCampo);
+        txtSalario.setPreferredSize(tamañoCampo);
+        txtFecha.setPreferredSize(tamañoCampo);
+        txtExperiencia.setPreferredSize(tamañoCampo);
+        txtBono.setPreferredSize(tamañoCampo);
+        
+        JLabel lblId = new JLabel("ID empleado:");
+        lblId.setFont(fuenteEtiqueta);
 
-        formulario.add(new JLabel("Estado:"));
-        formulario.add(chkActivo);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 0.45;
 
-        JPanel botones = new JPanel();
+        formulario.add(lblId, gbc);
+
+        JPanel panelId = new JPanel(new BorderLayout(10, 0));
+
+        panelId.add(txtId, BorderLayout.CENTER);
+        panelId.add(btnBuscar, BorderLayout.EAST);
+
+        gbc.gridx = 1;
+        gbc.weightx = 0.55;
+
+        formulario.add(panelId, gbc);
+        
+        JLabel lblNombre = new JLabel("Nombre completo:");
+        lblNombre.setFont(fuenteEtiqueta);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        formulario.add(lblNombre, gbc);
+
+        gbc.gridx = 1;
+        formulario.add(txtNombre, gbc);
+
+
+        JLabel lblDepartamento = new JLabel("Departamento:");
+        lblDepartamento.setFont(fuenteEtiqueta);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        formulario.add(lblDepartamento, gbc);
+
+        gbc.gridx = 1;
+        formulario.add(txtDepartamento, gbc);
+
+
+        JLabel lblSalario = new JLabel("Salario mensual:");
+        lblSalario.setFont(fuenteEtiqueta);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        formulario.add(lblSalario, gbc);
+
+        gbc.gridx = 1;
+        formulario.add(txtSalario, gbc);
+
+
+        JLabel lblFecha = new JLabel("Fecha contratación:");
+        lblFecha.setFont(fuenteEtiqueta);
+
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        formulario.add(lblFecha, gbc);
+
+        gbc.gridx = 1;
+        formulario.add(txtFecha, gbc);
+
+
+        JLabel lblExperiencia = new JLabel("Años de experiencia:");
+        lblExperiencia.setFont(fuenteEtiqueta);
+
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        formulario.add(lblExperiencia, gbc);
+
+        gbc.gridx = 1;
+        formulario.add(txtExperiencia, gbc);
+
+
+        JLabel lblBono = new JLabel("Bono anual:");
+        lblBono.setFont(fuenteEtiqueta);
+
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        formulario.add(lblBono, gbc);
+
+
+        gbc.gridx = 1;
+        formulario.add(txtBono, gbc);
+
+
+        JLabel lblEstado = new JLabel("Estado:");
+        lblEstado.setFont(fuenteEtiqueta);
+
+        gbc.gridx = 0;
+        gbc.gridy = 7;
+        formulario.add(lblEstado, gbc);
+
+        gbc.gridx = 1;
+        formulario.add(chkActivo, gbc);
+        
+        
+        JPanel botones = new JPanel(
+                new FlowLayout(FlowLayout.CENTER, 10, 10)
+        );
+
+        btnActualizar.setPreferredSize(new Dimension(130, 45));
+        btnRegresar.setPreferredSize(new Dimension(130, 45));
+
+        btnActualizar.setFont(new Font("Arial", Font.BOLD, 16));
+        btnRegresar.setFont(new Font("Arial", Font.BOLD, 16));
 
         botones.add(btnActualizar);
         botones.add(btnRegresar);

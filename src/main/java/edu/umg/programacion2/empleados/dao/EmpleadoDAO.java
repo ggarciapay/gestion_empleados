@@ -121,7 +121,7 @@ public class EmpleadoDAO {
                 "fecha_contratacion = ?, " +
                 "activo = ?, " +
                 "anios_experiencia = ?, " +
-                "bono_anual = ?, " +
+                "bono_anual = ? " +
                 "WHERE id = ?";
 
         try (Connection conexion = obtenerConexion();
@@ -132,9 +132,9 @@ public class EmpleadoDAO {
             ps.setBigDecimal(3, empleado.getSalario());
             ps.setDate(4, Date.valueOf(empleado.getFechaContratacion()));
             ps.setBoolean(5, empleado.isActivo());
-            ps.setInt(6, empleado.getId());
-            ps.setInt(7, empleado.getAnios_experiencia());
-            ps.setBigDecimal(8, empleado.getBono_anual());
+            ps.setInt(6, empleado.getAnios_experiencia());
+            ps.setBigDecimal(7, empleado.getBono_anual());
+            ps.setInt(8, empleado.getId());
             
             ps.executeUpdate();
         }
