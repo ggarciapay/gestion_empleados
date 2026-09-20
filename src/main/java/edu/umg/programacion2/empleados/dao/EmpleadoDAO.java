@@ -28,7 +28,7 @@ public class EmpleadoDAO {
     public void crear(Empleado empleado) throws SQLException {
 
         String sql = "INSERT INTO empleados " +
-                "(nombre, departamento, salario, fecha_contratacion, activo, anios_experiencia, bono_anual ) " +
+                "(nombre, departamento, salario, fecha_contratacion, activo, anios_experiencia, bono_anual) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conexion = obtenerConexion();
@@ -67,7 +67,7 @@ public class EmpleadoDAO {
                         rs.getBigDecimal("salario"),
                         rs.getDate("fecha_contratacion").toLocalDate(),
                         rs.getBoolean("activo"),
-                        rs.getInt("anio_experiencia"),
+                        rs.getInt("anios_experiencia"),
                         rs.getBigDecimal("bono_anual")
                 );
 
@@ -100,7 +100,7 @@ public class EmpleadoDAO {
                             rs.getBigDecimal("salario"),
                             rs.getDate("fecha_contratacion").toLocalDate(),
                             rs.getBoolean("activo"),
-                            rs.getInt("anio_experiencia"),
+                            rs.getInt("anios_experiencia"),
                             rs.getBigDecimal("bono_anual")
                     );
 
@@ -133,8 +133,8 @@ public class EmpleadoDAO {
             ps.setDate(4, Date.valueOf(empleado.getFechaContratacion()));
             ps.setBoolean(5, empleado.isActivo());
             ps.setInt(6, empleado.getId());
-            ps.setInt(6, empleado.getAnios_experiencia());
-            ps.setBigDecimal(7, empleado.getBono_anual());
+            ps.setInt(7, empleado.getAnios_experiencia());
+            ps.setBigDecimal(8, empleado.getBono_anual());
             
             ps.executeUpdate();
         }

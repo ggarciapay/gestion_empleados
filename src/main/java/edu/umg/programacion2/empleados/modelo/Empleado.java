@@ -23,6 +23,8 @@ public class Empleado {
 		this.salario = salario;
 		this.fechaContratacion = fechaContratacion;
 		this.activo = activo;
+		this.anios_experiencia = anios_experiencia;
+		this.bono_anual = bono_anual;
 		
 	}
 
@@ -34,6 +36,8 @@ public class Empleado {
 		this.salario = salario;
 		this.fechaContratacion = fechaContratacion;
 		this.activo = activo;
+		this.anios_experiencia = anios_experiencia;
+		this.bono_anual = bono_anual;
 		
 	}
 	 
