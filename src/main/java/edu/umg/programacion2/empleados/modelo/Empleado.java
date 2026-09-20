@@ -11,9 +11,11 @@ public class Empleado {
 	private BigDecimal salario;
 	private LocalDate fechaContratacion;
 	private boolean activo;
+	private int anios_experiencia;
+	private BigDecimal bono_anual; 
 
 	public Empleado(int id, String nombre, String departamento, BigDecimal salario,
-			LocalDate fechaContratacion, boolean activo) {
+			LocalDate fechaContratacion, boolean activo, int anios_experiencia, BigDecimal bono_anual) {
 		
 		this.id = id;
 		this.nombre = nombre;
@@ -25,7 +27,7 @@ public class Empleado {
 	}
 
 	public Empleado(String nombre, String departamento, BigDecimal salario,
-			LocalDate fechaContratacion, boolean activo) {
+			LocalDate fechaContratacion, boolean activo, int anios_experiencia, BigDecimal bono_anual) {
 		
 		this.nombre = nombre;
 		this.departamento = departamento;
@@ -81,6 +83,22 @@ public class Empleado {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+
+	public int getAnios_experiencia() {
+		return anios_experiencia;
+	}
+
+	public void setAnios_experiencia(int anios_experiencia) {
+		this.anios_experiencia = anios_experiencia;
+	}
+
+	public BigDecimal getBono_anual() {
+		return bono_anual;
+	}
+
+	public void setBono_anual(BigDecimal bono_anual) {
+		this.bono_anual = bono_anual;
 	}
 	
 }

@@ -139,13 +139,56 @@ public class Main {
         }
 
         boolean activo = leerBooleano("¿El empleado está activo? (S/N): ");
+        
+        int anios_experiencia;
+
+        while (true) {
+
+            String textoExperiencia = leerTexto("Anios de Experiencia: ");
+
+            try {
+            	anios_experiencia = Integer.parseInt(textoExperiencia);
+
+                if (anios_experiencia > 0) {
+                    break;
+                }
+
+                System.out.println("los anios de experiencia deben ser mayor a 0.");
+
+            } catch (NumberFormatException e) {
+                System.out.println("Ingresen anios de experiencia validos");
+            }
+            
+        }
+        
+        BigDecimal bono_anual;
+
+        while (true) {
+
+            String textoBono = leerTexto("bono anual: ");
+
+            try {
+            	bono_anual = new BigDecimal(textoBono);
+
+                if (bono_anual.compareTo(BigDecimal.ZERO) > 0) {
+                    break;
+                }
+
+                System.out.println("El bono debe ser mayor a cero.");
+
+            } catch (NumberFormatException e) {
+                System.out.println("Ingrese un bono válido.");
+            }
+        }
 
         Empleado empleado = new Empleado(
                 nombre,
                 departamento,
                 salario,
                 fechaContratacion,
-                activo
+                activo,
+                anios_experiencia,
+                bono_anual
         );
 
         DAO.crear(empleado);
@@ -164,6 +207,9 @@ public class Main {
             System.out.println("No hay empleados registrados.");
             return;
         }
+        
+        int registroMasBajo = empleados.get(0).getId();
+        int registroMasAlto = empleados.get(0).getId();
 
         for (Empleado empleado : empleados) {
 
@@ -177,9 +223,25 @@ public class Main {
                     empleado.getNombre(),
                     empleado.getDepartamento(),
                     empleado.getSalario().toPlainString(),
-                    estado
+                    estado,
+                    empleado.getAnios_experiencia(),
+                    empleado.getBono_anual()
             );
+            
+            if (empleado.getId() > registroMasAlto) {
+        		registroMasAlto = empleado.getId();
+        	}
+        	
+        	if (empleado.getId() < registroMasBajo) {
+        		registroMasBajo = empleado.getId();
+        	}
         }
+        
+        System.out.println("");
+        System.out.println(" ==== Registro Por Valor Numerico ==== ");
+        System.out.println("Registro con valor numerico mas alto: " + registroMasAlto);
+        System.out.println("Registro con valor numerico mas bajo: " + registroMasBajo + "\n");
+        
     }
 
     private static void editarEmpleado() throws SQLException {
@@ -270,12 +332,57 @@ public class Main {
 
         boolean activo = leerBooleano(
                 "¿El empleado está activo? (S/N): ");
+        
+
+        int anios_experiencia;
+
+        while (true) {
+
+            String textoExperiencia = leerTexto("Anios de Experiencia: ");
+
+            try {
+            	anios_experiencia = Integer.parseInt(textoExperiencia);
+
+                if (anios_experiencia > 0) {
+                    break;
+                }
+
+                System.out.println("los anios de experiencia deben ser mayor a 0.");
+
+            } catch (NumberFormatException e) {
+                System.out.println("Ingresen anios de experiencia validos");
+            }
+            
+        }
+        
+        BigDecimal bono_anual;
+
+        while (true) {
+
+            String textoBono = leerTexto("bono anual: ");
+
+            try {
+            	bono_anual = new BigDecimal(textoBono);
+
+                if (bono_anual.compareTo(BigDecimal.ZERO) > 0) {
+                    break;
+                }
+
+                System.out.println("El bono debe ser mayor a cero.");
+
+            } catch (NumberFormatException e) {
+                System.out.println("Ingrese un bono válido.");
+            }
+        }
+
 
         empleado.setNombre(nombre);
         empleado.setDepartamento(departamento);
         empleado.setSalario(salario);
         empleado.setFechaContratacion(fechaContratacion);
         empleado.setActivo(activo);
+        empleado.setAnios_experiencia(anios_experiencia);
+        empleado.setBono_anual(bono_anual);
 
         DAO.actualizar(empleado);
 

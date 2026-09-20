@@ -28,8 +28,8 @@ public class EmpleadoDAO {
     public void crear(Empleado empleado) throws SQLException {
 
         String sql = "INSERT INTO empleados " +
-                "(nombre, departamento, salario, fecha_contratacion, activo) " +
-                "VALUES (?, ?, ?, ?, ?)";
+                "(nombre, departamento, salario, fecha_contratacion, activo, anios_experiencia, bono_anual ) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conexion = obtenerConexion();
              PreparedStatement ps = conexion.prepareStatement(sql)) {
@@ -39,6 +39,8 @@ public class EmpleadoDAO {
             ps.setBigDecimal(3, empleado.getSalario());
             ps.setDate(4, Date.valueOf(empleado.getFechaContratacion()));
             ps.setBoolean(5, empleado.isActivo());
+            ps.setInt(6, empleado.getAnios_experiencia());
+            ps.setBigDecimal(7, empleado.getBono_anual());
 
             ps.executeUpdate();
         }
@@ -49,8 +51,8 @@ public class EmpleadoDAO {
         List<Empleado> empleados = new ArrayList<>();
 
         String sql = "SELECT id, nombre, departamento, salario, " +
-                "fecha_contratacion, activo " +
-                "FROM empleados ORDER BY id";
+                "fecha_contratacion, activo, anios_experiencia, bono_anual " +
+                "FROM empleados";
 
         try (Connection conexion = obtenerConexion();
              PreparedStatement ps = conexion.prepareStatement(sql);
@@ -64,7 +66,9 @@ public class EmpleadoDAO {
                         rs.getString("departamento"),
                         rs.getBigDecimal("salario"),
                         rs.getDate("fecha_contratacion").toLocalDate(),
-                        rs.getBoolean("activo")
+                        rs.getBoolean("activo"),
+                        rs.getInt("anio_experiencia"),
+                        rs.getBigDecimal("bono_anual")
                 );
 
                 empleados.add(empleado);
@@ -77,7 +81,7 @@ public class EmpleadoDAO {
     public Optional<Empleado> buscarPorId(int id) throws SQLException {
 
         String sql = "SELECT id, nombre, departamento, salario, " +
-                "fecha_contratacion, activo " +
+                "fecha_contratacion, activo, anios_experiencia, bono_anual " +
                 "FROM empleados WHERE id = ?";
 
         try (Connection conexion = obtenerConexion();
@@ -95,7 +99,9 @@ public class EmpleadoDAO {
                             rs.getString("departamento"),
                             rs.getBigDecimal("salario"),
                             rs.getDate("fecha_contratacion").toLocalDate(),
-                            rs.getBoolean("activo")
+                            rs.getBoolean("activo"),
+                            rs.getInt("anio_experiencia"),
+                            rs.getBigDecimal("bono_anual")
                     );
 
                     return Optional.of(empleado);
@@ -113,7 +119,9 @@ public class EmpleadoDAO {
                 "departamento = ?, " +
                 "salario = ?, " +
                 "fecha_contratacion = ?, " +
-                "activo = ? " +
+                "activo = ?, " +
+                "anios_experiencia = ?, " +
+                "bono_anual = ?, " +
                 "WHERE id = ?";
 
         try (Connection conexion = obtenerConexion();
@@ -125,7 +133,9 @@ public class EmpleadoDAO {
             ps.setDate(4, Date.valueOf(empleado.getFechaContratacion()));
             ps.setBoolean(5, empleado.isActivo());
             ps.setInt(6, empleado.getId());
-
+            ps.setInt(6, empleado.getAnios_experiencia());
+            ps.setBigDecimal(7, empleado.getBono_anual());
+            
             ps.executeUpdate();
         }
     }
